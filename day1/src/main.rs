@@ -3,13 +3,18 @@ use std::vec::Vec;
 fn main() {
     let input = include_str!("../input.txt");
 
-    println!("{}",
-    input.lines().fold((0, 0), |(acc, best), line| {
-        match line.parse::<i64>() {
-            Ok(i) => return (acc + i, best),
-            Err(_) => return (0, std::cmp::max(best, acc))
-        }
-    }).1);
+    println!(
+        "{}",
+        input
+            .lines()
+            .fold((0, 0), |(acc, best), line| {
+                match line.parse::<i64>() {
+                    Ok(i) => (acc + i, best),
+                    Err(_) => (0, std::cmp::max(best, acc)),
+                }
+            })
+            .1
+    );
 
     let mut calories = Vec::<i64>::new();
     input.lines().fold(&mut calories, |best, line| {
@@ -19,7 +24,7 @@ fn main() {
 
         match line.parse::<i64>() {
             Ok(i) => *best.last_mut().unwrap() += i,
-            Err(_) => best.push(0)
+            Err(_) => best.push(0),
         }
         best
     });
