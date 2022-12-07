@@ -37,7 +37,6 @@ fn part1(ent: Rc<RefCell<Directory>>) -> i64 {
 fn part2(ent: Rc<RefCell<Directory>>, free_space: i64) -> i64 {
     let self_sz = directory_size(Rc::clone(&ent));
     if free_space + self_sz > 30000000 {
-        // println!("Viable! {} {} {}", ent.borrow().name, self_sz, free_space + self_sz);
         std::cmp::min(
             self_sz,
             ent.borrow()
@@ -59,9 +58,8 @@ fn main() {
         files: vec![],
         children: vec![],
     }));
-    // let mut root_tree = DirectoryTree { parent: None, children: vec![], entry: &root};
+    
     let mut cwd = Rc::clone(&root);
-
     let input = include_str!("../input.txt");
 
     let mut line_it = input.lines().peekable();
@@ -77,7 +75,6 @@ fn main() {
                     let new_cwd = Rc::clone(cwd.borrow().parent.as_ref().unwrap());
                     cwd = new_cwd;
                 } else {
-                    // println!("{:?}", cwd.borrow().children);
                     let new_cwd = Rc::clone(
                         cwd.borrow()
                             .children
