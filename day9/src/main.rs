@@ -155,7 +155,7 @@ fn main() {
     }
 
     // bump the tail setting
-    grid_copy.translate_pt2(0, 0);
+    grid_copy.translate_pt1(0, 0);
     println!("{}", grid_copy.positions.len());
 
     grid_copy = grid;
